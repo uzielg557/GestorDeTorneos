@@ -1,68 +1,119 @@
-# 🏆 Gestor de Torneos
+# 🏆 Gestor de Torneos — C# + WPF + SQL Server
 
-Aplicación de escritorio desarrollada en **C# + WPF + SQL Server**, diseñada para gestionar torneos en formato **Liga** y **Eliminatoria Directa**.  
-Permite registrar equipos, generar jornadas automáticamente, llevar el control de resultados y clasificar a los mejores para luego disputar un formato de eliminación.
+Aplicación de escritorio desarrollada en **C# (WPF)** con persistencia en **SQL Server**, diseñada para gestionar torneos en formato **Liga** y **Eliminatoria Directa**.
 
-Este proyecto fue desarrollado por un **ingeniero mecatrónico con enfoque en software**, combinando lógica deportiva, programación estructurada y conexión a bases de datos.
+Permite:
+
+- Registrar equipos  
+- Generar jornadas automáticamente  
+- Registrar resultados  
+- Calcular tabla de posiciones  
+- Avanzar a fases eliminatorias (Top 4 / 8 / 16)  
+- Determinar un campeón  
+
+Este proyecto combina lógica de competencia deportiva, estructuras de datos, WPF/MVVM básico y operaciones SQL reales.
 
 ---
 
-## 📌 Características principales
+## 📸 Vista principal
 
-### ✔ Modo **Liga**
-- Registro de equipos (Agregar/Eliminar).
-- Generación automática de *todas las jornadas* usando el método de rotación circular.
-- Registro de goles por partido.
+![MainWindow](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B1EA29568-69E2-4EC8-80CE-354B54763928%7D.png)
+
+---
+
+# 📌 Funcionalidades principales
+
+---
+
+# ⚽ Modo Liga
+
+- Gestión de equipos (Agregar / Editar / Eliminar)  
+- Generación automática de jornadas con algoritmo **Round Robin**  
+- Registro de goles por partido  
 - Cálculo automático de:
-  - Puntos
-  - Diferencia de goles
-  - Victorias, empates y derrotas
-  - Goles a favor y en contra
-- Tabla de posiciones ordenada como en ligas profesionales.
-- Inserción y actualización de datos en SQL Server.
-- Al finalizar, permite seleccionar:
-  - Top 4  
-  - Top 8  
-  - Top 16  
-  para continuar en modo eliminatoria.
+  - Puntos  
+  - Victorias, empates y derrotas  
+  - Goles a favor y en contra  
+  - Diferencia de goles  
+- Tabla de posiciones profesional  
+- Clasificación a Top 4 / Top 8 / Top 16  
 
 ---
 
-### ✔ Modo **Eliminatoria Directa**
-- Generación automática de llaves.
-- Enfrenta al mejor clasificado vs el peor (1 vs último, 2 vs penúltimo…).
-- Sistema de avance por rondas:
-  - Cuartos
-  - Semifinal
-  - Final
-- Manejo dinámico de ganadores y creación automática de la siguiente fase.
-- Determina el campeón del torneo.
+## 🖼️ Capturas — Modo Liga
+
+### ✔ Equipos cargados
+![Equipos](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B5230773B-F682-40BE-9964-27EB686CA5A8%7D.png)
+
+### ✔ Liga generada
+![Liga generada](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7BA87D9F98-0BBE-416D-AAA5-1177636A2ADB%7D.png)
+
+### ✔ "Descansa" automático
+![Descanso](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B661C21E8-051F-4A80-9178-49F8BDA8AC36%7D.png)
+
+### ✔ Liga finalizada
+![Liga finalizada](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7BCB32A77D-B501-4504-B87A-27399A3F08B5%7D.png)
+
+### ✔ Selección de clasificados
+![Repechaje](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B64BE3037-4C7F-434A-A6BC-9B27DA0A061D%7D.png)
+
+### ✔ Llaves desde la Liga
+![Llaves liga](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B978CBBF0-3180-45BC-B378-610944371CF0%7D.png)
+
+### ✔ Campeón
+![Campeón liga](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B331C546A-1C49-4BC1-98F9-B597AC7FF984%7D.png)
 
 ---
 
-### ✔ Conexión a SQL Server
+# 🔥 Modo Eliminatoria Directa
 
-El sistema utiliza 3 tablas:
+- Emparejamiento 1 vs último, 2 vs penúltimo...  
+- Registro de resultados por fase  
+- Avance automático de ganadores  
+- Rondas: Cuartos → Semifinal → Final  
+- Muestra al campeón  
 
-#### 🗂 Tabla **Equipos**
+---
+
+## 🖼️ Capturas — Modo Eliminatoria
+
+### ✔ Pantalla vacía
+![Empty eliminatoria](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B4A165459-D852-4238-8DA7-FF24BF9A43D5%7D.png)
+
+### ✔ Equipos listos
+![Equipos eliminatoria](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7BD9AED9A0-988D-40DA-A92D-36B0072B126A%7D.png)
+
+### ✔ Llaves generadas
+![Llaves](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B1222B026-DEFA-4321-AA42-A678F43944AC%7D.png)
+
+### ✔ Campeón final
+![Campeón](https://raw.githubusercontent.com/uzielg557/GestorDeTorneos/main/%7B73810B48-902D-4763-AC68-9DA2B240D424%7D.png)
+
+---
+
+# 🗄️ Conexión a SQL Server
+
+## Tablas utilizadas
+
+### 🧩 Equipos
 | EquipoID | Nombre |
-|---------|--------|
 
-#### 🗂 Tabla **Jornadas**
+### 🧩 Jornadas
 | JornadaID | Numero |
 
-#### 🗂 Tabla **Partidos**
+### 🧩 Partidos
 | PartidoID | JornadaID | EquipoLocalID | EquipoVisitanteID | GolesLocal | GolesVisitante | Jugado |
 
-Incluye operaciones:
+## Operaciones SQL utilizadas
+
 - INSERT  
 - UPDATE  
-- SELECT con JOINs  
-- InsertAndReturnID (para capturar IDs generados automáticamente)
+- SELECT con JOIN  
+- InsertAndReturnID  
 
 ---
 
-## 📐 Arquitectura del proyecto
+# 🧱 Arquitectura del proyecto
 
 ```
 GestorDeTorneos/
@@ -74,9 +125,9 @@ GestorDeTorneos/
 │   └── DatabaseHelper.cs
 │
 ├── Vistas/
-│   ├── Liga.xaml (+ .cs)
-│   ├── EliminatoriaDirecta.xaml (+ .cs)
-│   └── SeleccionarClasificados.xaml (+ .cs)
+│   ├── Liga.xaml / Liga.xaml.cs
+│   ├── EliminatoriaDirecta.xaml / EliminatoriaDirecta.xaml.cs
+│   └── SeleccionarClasificados.xaml / SeleccionarClasificados.xaml.cs
 │
 ├── App.xaml
 └── MainWindow.xaml
@@ -84,57 +135,48 @@ GestorDeTorneos/
 
 ---
 
-## 🧠 Lógica clave del proyecto
+# 🧠 Lógica clave
 
-### 🎯 Generación de jornadas (Round Robin)
-Implementa la rotación clásica:
-- Si hay equipos impares → se agrega “DESCANSA”.
-- Se rotan elementos para generar todas las combinaciones.
-- Cada fecha contiene sus propios partidos.
+## 🔄 Round Robin
+- Agrega “Descansa” si hay equipos impares  
+- Rotación circular  
+- Genera todas las jornadas  
 
-### 🎯 Registro de resultados
-Actualiza automáticamente:
-- Puntos (3/1/0)
-- GF / GC
-- Diferencia
-- Posiciones ordenadas en vivo
+## 📝 Registro de resultados
+- Tabla recalculada automáticamente  
+- Reglas del fútbol  
+- Orden por puntos → diferencia → goles  
 
-### 🎯 Cruce de eliminatoria
-- Toma a los clasificados ordenados (Top 4/8/16).
-- Los empareja así:
-  - 1 vs último
-  - 2 vs penúltimo  
-  - …
-- Cada ganador avanza y se genera la siguiente fase automáticamente.
+## 🎯 Eliminatoria
+- Cruces según ranking  
+- Avance por rondas  
+- Campeón final  
 
 ---
 
-## 🛠 Tecnologías utilizadas
+# 🛠️ Tecnologías utilizadas
 
-- **C# (.NET)**
-- **WPF (XAML)**
-- **SQL Server**
-- LINQ
-- Programación orientada a objetos
-- Arquitectura por capas
+- C#  
+- WPF  
+- SQL Server  
+- ADO.NET  
+- LINQ  
+- Programación orientada a objetos  
 
 ---
 
-## ▶️ ¿Cómo ejecutar el proyecto?
+# ▶️ Cómo ejecutar el proyecto
 
-### 1️⃣ Clonar el repositorio
-```bash
+## 1️⃣ Clonar repositorio
+```
 git clone https://github.com/uzielg557/GestorDeTorneos.git
 ```
 
-### 2️⃣ Abrir en **Visual Studio**
+## 2️⃣ Abrir en Visual Studio
 
-### 3️⃣ Configurar SQL Server
-Crear una base de datos llamada `TorneosDB`.
+## 3️⃣ Crear base de datos
 
-Luego crear las tablas:
-
-```sql
+```
 CREATE TABLE Equipos (
     EquipoID INT PRIMARY KEY IDENTITY(1,1),
     Nombre VARCHAR(50) NOT NULL
@@ -156,27 +198,25 @@ CREATE TABLE Partidos (
 );
 ```
 
-### 4️⃣ Ajustar cadena de conexión
-Modificar en `DatabaseHelper.cs`:
+## 4️⃣ Ajustar cadena de conexión
+Editar en `DatabaseHelper.cs`:
 
-```csharp
-private static readonly string connectionString =
-    "Server=TU_SERVIDOR;Database=TorneosDB;Trusted_Connection=True;";
+```
+"Server=TU_SERVIDOR;Database=TorneosDB;Trusted_Connection=True;"
 ```
 
-### 5️⃣ Ejecutar la aplicación
-Compilar y correr desde Visual Studio.
+## 5️⃣ Ejecutar  
+Presiona **F5** en Visual Studio.
 
 ---
 
-## 🏅 Autor
+# 🏅 Autor
 
-Proyecto desarrollado por un **ingeniero mecatrónico con enfoque en software**, apasionado por:
-
-- Lógica deportiva  
-- Programación backend  
-- Bases de datos  
-- Aplicaciones de escritorio  
-- Interfaces WPF  
+**Víctor Uziel García Jácome**  
+Ingeniero Mecatrónico con enfoque en software.
 
 ---
+
+# ⭐ ¿Te gustó el proyecto?
+
+**¡Dale una estrella ⭐ en GitHub!**
